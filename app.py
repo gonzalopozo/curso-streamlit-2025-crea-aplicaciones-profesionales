@@ -1,4 +1,7 @@
 import streamlit as st
+import pandas as pd
+
+df = pd.read_csv('NBA_Stats_2023-24_All_Stats_Playoffs.csv')
 
 def main():
     # st.title("Curso de Streamlit") # Mostrar un h1
@@ -15,12 +18,14 @@ def main():
     # st.error("Esto es un error") # Mostrar un mensaje de error
     # st.exception("Esto es una excepción") # Mostrar un mensaje de una excepción 
 
-    st.title("Curso de Streamlit")
-    st.write("Texto normal") # st.write() acepta texto normal
-    st.write("## Esto es un teto de markdown") # st.write() también acepta texto markdown
-    st.write(1 + 2) # st.write() también acepta operaciones matematicas y casi puede mostrar cualquier cosa en la web
+    # st.write("Texto normal") # st.write() acepta texto normal
+    # st.write("## Esto es un teto de markdown") # st.write() también acepta texto markdown
+    # st.write(1 + 2) # st.write() también acepta operaciones matematicas y casi puede mostrar cualquier cosa en la web
     # En general st.write() es el todoterreno a la hora de mostrar elementos usando streamlit
 
+    st.title("Curso de Streamlit")
+    st.header("Dataframe:")
+    st.dataframe(df) # st.dataframe() muestra un dataframe como una tabla (por ejemplo, los dataframes de pandas como en este ejemplo)
 
 if __name__ == "__main__":
     main()
