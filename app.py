@@ -26,6 +26,9 @@ def main():
     st.title("Curso de Streamlit")
     st.header("Dataframe:")
     st.dataframe(df) # st.dataframe() muestra un dataframe como una tabla (por ejemplo, los dataframes de pandas como en este ejemplo)
+    st.dataframe(df.style.highlight_max(axis=0)) # Destacar valores maximos de las columnas
+    st.dataframe(df.head(100)) # Mostrar n filas desde el inicio
+    st.dataframe(df.tail(100)) # Mostrar n filas desde el final
 
 if __name__ == "__main__":
     main()
