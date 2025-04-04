@@ -105,6 +105,8 @@ def main():
     number = st.number_input("Ingresa tu número", min_value=1.0, max_value=30.0, step=0.5)
     st.write(number)
 
+    date = st.date_input("Selecciona una fecha")
+    st.write(date)
 
 
 if __name__ == "__main__":
