@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from PIL import Image
 
 df = pd.read_csv('NBA_Stats_2023-24_All_Stats_Playoffs.csv')
 
@@ -43,41 +44,51 @@ def main():
     
     # st.code(codigo, language="js") # Mostrar un trozo de código definiendo el lenguaje para mostrar la sintaxis con colores
 
+    # Selectbox
+    # option = st.selectbox( # Sirve para crear un select de HTML, la selección de este select se guardará en la variable con la cual creamos y asignamos el selectbox
+    #     'Elige de qué posición quieres jugar 🏀',
+    #     ['Base', 'Escolta', 'Alero', 'Ala-pívot', 'Pívot']
+    # )
+
+    # st.write(f"¡Vas a jugar de {option}!")
+
+    # options = st.multiselect(
+    #     'Elige de qué posiciones puedes jugar 🏀',
+    #     ['Base', 'Escolta', 'Alero', 'Ala-pívot', 'Pívot']
+    # )
+
+    # st.write(f"Puedes jugar de {', '.join(options)}!")
+
+    # ppg = st.slider(
+    #     'Indica tu promedio de puntos por partido:',
+    #     min_value=0.0, # Valor minimo
+    #     max_value=40.0, # Valor maximo
+    #     value=10.0, # Valor inicial
+    #     step=0.1 # Valor por el cual se incrementara o decrementara al mover el slider
+    #     # Todos los valores de los atributos deben ser del mismo tipo (int o float), pero no pueden ser unos int y otros float
+    # )
+
+    # st.write(f'Tus puntos por partido (ppg) son {ppg}')
+
+    # salary = st.select_slider(
+    #     'Indica la franja en la que se encuentra tu salario:',
+    #     ['500k-2.5M', '2.6M-12.5M', '12.6M-25.5M', '25.6M-37.5M', '37.6M-49.9M', '50M+'],
+    #     value='12.6M-25.5M', # Valor inicial
+    # )
+
+    # st.write(f'Tu salario esta en la franja de {salary}')
+
     st.title("Curso de Streamlit")
 
-    # Selectbox
-    option = st.selectbox( # Sirve para crear un select de HTML, la selección de este select se guardará en la variable con la cual creamos y asignamos el selectbox
-        'Elige de qué posición quieres jugar 🏀',
-        ['Base', 'Escolta', 'Alero', 'Ala-pívot', 'Pívot']
-    )
-
-    st.write(f"¡Vas a jugar de {option}!")
-
-    options = st.multiselect(
-        'Elige de qué posiciones puedes jugar 🏀',
-        ['Base', 'Escolta', 'Alero', 'Ala-pívot', 'Pívot']
-    )
-
-    st.write(f"Puedes jugar de {', '.join(options)}!")
-
-    ppg = st.slider(
-        'Indica tu promedio de puntos por partido:',
-        min_value=0.0, # Valor minimo
-        max_value=40.0, # Valor maximo
-        value=10.0, # Valor inicial
-        step=0.1 # Valor por el cual se incrementara o decrementara al mover el slider
+    imagen = st.select_slider(
+        'Elige la foto de Lebron 🏀',
+        options=['lebron1.jpg', 'lebron2.jpg', 'lebron3.jpg', 'lebron4.jpg'],
+        value="lebron1.jpg", # Valor inicial
         # Todos los valores de los atributos deben ser del mismo tipo (int o float), pero no pueden ser unos int y otros float
     )
 
-    st.write(f'Tus puntos por partido (ppg) son {ppg}')
-
-    salary = st.select_slider(
-        'Indica la franja en la que se encuentra tu salario:',
-        ['500k-2.5M', '2.6M-12.5M', '12.6M-25.5M', '25.6M-37.5M', '37.6M-49.9M', '50M+'],
-        value='12.6M-25.5M', # Valor inicial
-    )
-
-    st.write(f'Tu salario esta en la franja de {salary}')
+    img = Image.open(f"img/{"".join(imagen)}")
+    st.image(img, use_container_width=True)
 
 if __name__ == "__main__":
     main()
