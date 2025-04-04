@@ -60,6 +60,16 @@ def main():
 
     st.write(f"Puedes jugar de {', '.join(options)}!")
 
+    ppg = st.slider(
+        'Indica tu promedio de puntos por partido:',
+        min_value=0.0, # Valor minimo
+        max_value=40.0, # Valor maximo
+        value=10.0, # Valor inicial
+        step=0.1 # Valor por el cual se incrementara o decrementara al mover el slider
+        # Todos los valores de los atributos deben ser del mismo tipo (int o float), pero no pueden ser unos int y otros float
+    )
+
+    st.write(f'Tus puntos por partido (ppg) son {ppg}')
 
 if __name__ == "__main__":
     main()
