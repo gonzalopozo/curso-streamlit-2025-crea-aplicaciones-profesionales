@@ -82,7 +82,6 @@ def main():
     #     'Elige la foto de Lebron 🏀',
     #     options=['lebron1.jpg', 'lebron2.jpg', 'lebron3.jpg', 'lebron4.jpg'],
     #     value="lebron1.jpg", # Valor inicial
-    #     # Todos los valores de los atributos deben ser del mismo tipo (int o float), pero no pueden ser unos int y otros float
     # )
 
     # img = Image.open(f"img/{"".join(imagen)}")
@@ -111,6 +110,13 @@ def main():
     hour = st.time_input("Selecciona una hora", value="12:00:00")
     st.write(hour)
 
+    color = st.color_picker("Selecciona un color")
+    st.html(
+        f"""
+        <div style="width:100px; height:100px; background-color:{color}; border-radius: 16px">
+        </div>
+        """
+    )
 
 if __name__ == "__main__":
     main()
