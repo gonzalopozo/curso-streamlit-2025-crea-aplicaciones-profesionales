@@ -53,6 +53,13 @@ def main():
 
     st.write(f"¡Vas a jugar de {option}!")
 
+    options = st.multiselect(
+        'Elige de qué posiciones puedes jugar 🏀',
+        ['Base', 'Escolta', 'Alero', 'Ala-pívot', 'Pívot']
+    )
+
+    st.write(f"Puedes jugar de {', '.join(options)}!")
+
 
 if __name__ == "__main__":
     main()
