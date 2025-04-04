@@ -78,17 +78,19 @@ def main():
 
     # st.write(f'Tu salario esta en la franja de {salary}')
 
+    # imagen = st.select_slider(
+    #     'Elige la foto de Lebron 🏀',
+    #     options=['lebron1.jpg', 'lebron2.jpg', 'lebron3.jpg', 'lebron4.jpg'],
+    #     value="lebron1.jpg", # Valor inicial
+    #     # Todos los valores de los atributos deben ser del mismo tipo (int o float), pero no pueden ser unos int y otros float
+    # )
+
+    # img = Image.open(f"img/{"".join(imagen)}")
+    # st.image(img, use_container_width=True)
+
     st.title("Curso de Streamlit")
-
-    imagen = st.select_slider(
-        'Elige la foto de Lebron 🏀',
-        options=['lebron1.jpg', 'lebron2.jpg', 'lebron3.jpg', 'lebron4.jpg'],
-        value="lebron1.jpg", # Valor inicial
-        # Todos los valores de los atributos deben ser del mismo tipo (int o float), pero no pueden ser unos int y otros float
-    )
-
-    img = Image.open(f"img/{"".join(imagen)}")
-    st.image(img, use_container_width=True)
+    with open("vid/lebron.mp4", "rb") as video_file:
+        st.video(video_file.read(), start_time=0, loop=1, autoplay=1)
 
 if __name__ == "__main__":
     main()
