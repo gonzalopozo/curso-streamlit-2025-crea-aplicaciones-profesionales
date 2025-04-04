@@ -88,12 +88,21 @@ def main():
     # img = Image.open(f"img/{"".join(imagen)}")
     # st.image(img, use_container_width=True)
 
-    st.title("Curso de Streamlit")
     # with open("vid/lebron.mp4", "rb") as video_file:
     #     st.video(video_file.read(), start_time=0, loop=1, autoplay=1)
 
-    with open('aud/lebron.mp3', 'rb') as audio_file:
-        st.audio(audio_file.read())
+    # with open('aud/lebron.mp3', 'rb') as audio_file:
+    #     st.audio(audio_file.read())
+
+    st.title("Curso de Streamlit")
+
+    name = st.text_input("Ingresa tu nombre:")
+    description = st.text_area("Ingresa tu descripción:")
+    
+    st.subheader(name)
+    st.write(description)
+
+
 
 if __name__ == "__main__":
     main()
