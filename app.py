@@ -71,5 +71,13 @@ def main():
 
     st.write(f'Tus puntos por partido (ppg) son {ppg}')
 
+    salary = st.select_slider(
+        'Indica la franja en la que se encuentra tu salario:',
+        ['500k-2.5M', '2.6M-12.5M', '12.6M-25.5M', '25.6M-37.5M', '37.6M-49.9M', '50M+'],
+        value='12.6M-25.5M', # Valor inicial
+    )
+
+    st.write(f'Tu salario esta en la franja de {salary}')
+
 if __name__ == "__main__":
     main()
