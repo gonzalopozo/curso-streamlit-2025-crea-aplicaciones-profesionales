@@ -89,8 +89,11 @@ def main():
     # st.image(img, use_container_width=True)
 
     st.title("Curso de Streamlit")
-    with open("vid/lebron.mp4", "rb") as video_file:
-        st.video(video_file.read(), start_time=0, loop=1, autoplay=1)
+    # with open("vid/lebron.mp4", "rb") as video_file:
+    #     st.video(video_file.read(), start_time=0, loop=1, autoplay=1)
+
+    with open('aud/lebron.mp3', 'rb') as audio_file:
+        st.audio(audio_file.read())
 
 if __name__ == "__main__":
     main()
