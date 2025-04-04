@@ -108,6 +108,9 @@ def main():
     date = st.date_input("Selecciona una fecha")
     st.write(date)
 
+    hour = st.time_input("Selecciona una hora", value="12:00:00")
+    st.write(hour)
+
 
 if __name__ == "__main__":
     main()
