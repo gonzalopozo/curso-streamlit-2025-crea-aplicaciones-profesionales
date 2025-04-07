@@ -22,11 +22,11 @@ def read_pdf(pdf_file):
     return all_the_text
 
 def save_file(uploaded_file):
-    # Crear el directorio si no existe
+    # learn Crear el directorio si no existe
     if not os.path.exists("temp"):
         os.makedirs("temp")
 
-    # Guardar el archivo en el directorio
+    # learn Guardar el archivo en el directorio
     with open(os.path.join("temp", uploaded_file.name), "wb") as f:
         f.write(uploaded_file.getbuffer())
 
@@ -44,8 +44,7 @@ def main():
             st.subheader("Imagen")
             img_file = st.file_uploader("Subir imagen", type=['png', 'jpg', 'jpeg'])
 
-
-            if img_file: # La solución del profesor es 'if img_file is not None'
+            if img_file: # learn La solución del profesor es 'if img_file is not None'
                 file_details = {
                     "file_name": img_file.name,
                     "file_type": img_file.type,
@@ -58,13 +57,12 @@ def main():
 
                 save_file(img_file)
 
-
         case "Conjunto de datos":
             st.subheader("Conjunto de datos")
 
             data_file = st.file_uploader("Subir CSV o excel", type=['csv', 'xlsx'])
 
-            if data_file: # La solución del profesor es 'if data_file is not None'
+            if data_file: # learn La solución del profesor es 'if data_file is not None'
                 file_details = {
                     "file_name": data_file.name,
                     "file_type": data_file.type,
@@ -77,7 +75,6 @@ def main():
 
                 if file_details["file_type"] == 'text/csv':
                     df = pd.read_csv(data_file)
-                    # st.write('hola')
 
                 elif file_details["file_type"] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
                     df = pd.read_excel(data_file)
@@ -109,11 +106,8 @@ def main():
 
                         case 'text/plain':
                             text = str(document_file.read(), 'utf-8')
-                            
-                            # st.write(text)
 
                         case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-                            # st.write('aaa')
                             text = docx2txt.process(document_file)
 
                     st.write(text)
