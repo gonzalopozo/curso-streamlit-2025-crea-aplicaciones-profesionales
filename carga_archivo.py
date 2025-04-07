@@ -29,7 +29,7 @@ def main():
 
     match selectSidebar:
         case "Imágenes":
-            st.subheader("ImAGEN")
+            st.subheader("Imagen")
             img_file = st.file_uploader("Subir imágen", type=['png', 'jpg', 'jpeg'])
 
 
@@ -71,6 +71,37 @@ def main():
 
         case "Archivos de documentos":
             st.subheader("Archivos de documentos")
+
+            document_file = st.file_uploader('Subir documento', type=["pdf", "docx", "txt"])
+            
+            if st.button("Procesar"):
+                if document_file:
+                    file_details = {
+                        "file_name": document_file.name,
+                        "file_type": document_file.type,
+                        "file_size": document_file.size,
+                    }
+
+                    st.write(file_details)
+
+                    text = None
+
+                    match file_details["file_type"]:
+                        case 'application/pdf':
+                            text = read_pdf(document_file)
+
+                        case 'text/plain':
+                            text = str(document_file.read(), 'utf-8')
+                            
+                            # st.write(text)
+
+                        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                            # st.write('aaa')
+                            text = docx2txt.process(document_file)
+
+                    st.write(text)
+
+
 
         case _:
             st.subheader("ERROR")
