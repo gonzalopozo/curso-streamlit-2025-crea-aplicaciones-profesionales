@@ -3,6 +3,7 @@ from PIL import Image
 import pandas as pd
 import docx2txt
 from PyPDF2 import PdfReader
+import os
 
 @st.cache_data
 def load_image(image_file):
@@ -20,6 +21,17 @@ def read_pdf(pdf_file):
     
     return all_the_text
 
+def save_file(uploaded_file):
+    # Crear el directorio si no existe
+    if not os.path.exists("temp"):
+        os.makedirs("temp")
+
+    # Guardar el archivo en el directorio
+    with open(os.path.join("temp", uploaded_file.name), "wb") as f:
+        f.write(uploaded_file.getbuffer())
+
+    return st.success(f"Archivo guardado: {uploaded_file.name} en temp")
+
 def main():
     st.title("Carga de archivos:")
 
@@ -30,7 +42,7 @@ def main():
     match selectSidebar:
         case "Imágenes":
             st.subheader("Imagen")
-            img_file = st.file_uploader("Subir imágen", type=['png', 'jpg', 'jpeg'])
+            img_file = st.file_uploader("Subir imagen", type=['png', 'jpg', 'jpeg'])
 
 
             if img_file: # La solución del profesor es 'if img_file is not None'
@@ -43,6 +55,9 @@ def main():
                 st.write(file_details)
 
                 st.write(load_image(img_file))
+
+                save_file(img_file)
+
 
         case "Conjunto de datos":
             st.subheader("Conjunto de datos")
@@ -68,6 +83,8 @@ def main():
                     df = pd.read_excel(data_file)
 
                 st.dataframe(df)
+
+                save_file(data_file)
 
         case "Archivos de documentos":
             st.subheader("Archivos de documentos")
@@ -101,7 +118,7 @@ def main():
 
                     st.write(text)
 
-
+                    save_file(document_file)
 
         case _:
             st.subheader("ERROR")
