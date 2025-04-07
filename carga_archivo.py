@@ -29,11 +29,11 @@ def main():
 
     match selectSidebar:
         case "Imágenes":
-            st.subheader("Imágenes")
+            st.subheader("ImAGEN")
             img_file = st.file_uploader("Subir imágen", type=['png', 'jpg', 'jpeg'])
 
 
-            if img_file: # La solución del profesor es if img_file is not None
+            if img_file: # La solución del profesor es 'if img_file is not None'
                 file_details = {
                     "file_name": img_file.name,
                     "file_type": img_file.type,
@@ -44,10 +44,30 @@ def main():
 
                 st.write(load_image(img_file))
 
-
-
         case "Conjunto de datos":
             st.subheader("Conjunto de datos")
+
+            data_file = st.file_uploader("Subir CSV o excel", type=['csv', 'xlsx'])
+
+            if data_file: # La solución del profesor es 'if data_file is not None'
+                file_details = {
+                    "file_name": data_file.name,
+                    "file_type": data_file.type,
+                    "file_size": data_file.size,
+                }
+
+                st.write(file_details)
+
+                df = None 
+
+                if file_details["file_type"] == 'text/csv':
+                    df = pd.read_csv(data_file)
+                    # st.write('hola')
+
+                elif file_details["file_type"] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                    df = pd.read_excel(data_file)
+
+                st.dataframe(df)
 
         case "Archivos de documentos":
             st.subheader("Archivos de documentos")
