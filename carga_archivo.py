@@ -32,6 +32,20 @@ def main():
             st.subheader("Imágenes")
             img_file = st.file_uploader("Subir imágen", type=['png', 'jpg', 'jpeg'])
 
+
+            if img_file: # La solución del profesor es if img_file is not None
+                file_details = {
+                    "file_name": img_file.name,
+                    "file_type": img_file.type,
+                    "file_size": img_file.size,
+                }
+
+                st.write(file_details)
+
+                st.write(load_image(img_file))
+
+
+
         case "Conjunto de datos":
             st.subheader("Conjunto de datos")
 
