@@ -25,6 +25,26 @@ def test_spinner():
     # learn Muestra un mensaje de éxito una vez finalizada la tarea
     st.success("¡Tarea completada!")
 
+def test_download_button():
+    st.title("Prueba de st.download_button()")
+    st.write("Haz clic en el botón para descargar el archivo '2023-2024-NBA-Player-Stats-Regular.xlsx'.")
+
+    # Lee el archivo en modo binario
+    try:
+        with open("2023-2024-NBA-Player-Stats-Regular.xlsx", "rb") as file:
+            file_data = file.read()
+    except FileNotFoundError:
+        st.error("El archivo no se encontró. Asegúrate de que '2023-2024-NBA-Player-Stats-Regular.xlsx' esté en el mismo directorio.")
+        return
+
+    # Botón de descarga
+    st.download_button(
+        label="Descargar archivo",
+        data=file_data,
+        file_name="datos_nba.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
 def main():
     st.title("Welcome to Lebron's home")
     st.sidebar.header("Navegación") # learn La sidebar no aparecerá si no tiene contenido asignado en su interior
@@ -45,6 +65,7 @@ def main():
     st.plotly_chart(fig3)
 
     test_spinner()
+    test_download_button()
 
 if __name__ == '__main__':
     main()
