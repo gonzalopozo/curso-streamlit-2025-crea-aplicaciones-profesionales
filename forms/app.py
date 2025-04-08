@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 def main():
     st.title("Tutorial de formularios en streamlit")
@@ -52,24 +53,38 @@ def main():
 
         case "Calculadora de salario":
             st.header("Formulario con columnas")
+            st.subheader("Calculadora de salario (de jornada laboral con días con la misma duración de horas de trabajo y horas enteras)")
 
             with st.form(key="formulario_salario"):
                 col1, col2, col3, col4 = st.columns(4)
 
                 with col1:
-                    hour_fee = st.number_input("Tarifa por hora en euros (€)", min_value=0.0)
+                    hour_fee = st.number_input("Tarifa por hora en euros (€)", min_value=0.0, value=10.0)
 
                 with col2:
-                    hours_per_day = st.number_input("Horas cada día", min_value=0.30, max_value=8.30)
+                    hours_per_day = st.number_input("Horas cada día", key="hours_per_day",  min_value=1, max_value=8, step=1)
 
                 with col3:
-                    days_per_week = st.number_input("Días a la semana", min_value=1, max_value=7)
+                    days_per_week = st.number_input("Días a la semana", min_value=1, max_value=5, step=1)
 
                 with col4:
-                    calcular = st.form_submit_button("Calcular salario")
+                    calculate = st.form_submit_button("Calcular salario")
 
-                if calcular:
-                    st.write("Prueba formularios con columnas")
+                if calculate:
+                    st.info("Tu sueldo es el siguiente")  # Mensaje tipo info
+
+                    st.table(pd.DataFrame(
+                        {
+                            "€/segundo": f"{hour_fee/3600:.4f}€",
+                            "€/minuto": f"{hour_fee/60:.2f}€",
+                            "€/hora": f"{hour_fee:.2f}€",
+                            "€/día": f"{(hour_fee * hours_per_day):.2f}€",
+                            "€/semana": f"{(hour_fee * hours_per_day * days_per_week):.2f}€",
+                            "€/mes": f"{(hour_fee * hours_per_day * days_per_week * 4):.2f}€",
+                            "€/año": f"{(hour_fee * hours_per_day * days_per_week * 4 * 12):.2f}€",
+                        }, index=["Salario"]
+                    ))
+
 
         case "Reinicio de formularios":
             st.header("-------")
