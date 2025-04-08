@@ -87,7 +87,16 @@ def main():
 
 
         case "Reinicio de formularios":
-            st.header("-------")
+            st.header("Funcionalidad de reinicio de formularios")
+            st.write("Los formularios con clear_on_submit=True se reiniciarán después del envio")
+
+            with st.form(key="formulario_reiniciar", clear_on_submit=True):
+                user_input = st.text_input("Escribe algo")
+                submit_btn_form3 = st.form_submit_button("Enviar")
+
+            if submit_btn_form3:
+                st.success(f"Escribiste: {user_input}")
+                st.info("¡Obeserva cómo el formulario se limpió automáticamente!")
 
 if __name__ == "__main__":
     main()
