@@ -64,8 +64,35 @@ def main():
     fig3 = px.bar(df_avg, x="POS", y="MPG", color="POS") # learn Permite crear gráficos de barras de plotly
     st.plotly_chart(fig3)
 
-    test_spinner()
+    # test_spinner()
     test_download_button()
+
+    st.title("Prueba de st.chat_input() y st.chat_message()")
+
+    # Inicializa el historial de mensajes en el estado de sesión
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    # Muestra los mensajes almacenados en el historial
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    # Entrada del usuario
+    if prompt := st.chat_input("Escribe tu mensaje aquí..."):
+        # Añade el mensaje del usuario al historial
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        # Muestra el mensaje del usuario en la interfaz
+        with st.chat_message("user"):
+            st.markdown(prompt)
+        # Genera una respuesta automática
+        response = f"Echo: {prompt}"
+        # Añade la respuesta al historial
+        st.session_state.messages.append({"role": "assistant", "content": response})
+        # Muestra la respuesta en la interfaz
+        with st.chat_message("assistant"):
+            st.markdown(response)
+
 
 if __name__ == '__main__':
     main()
