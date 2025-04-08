@@ -34,7 +34,7 @@ def main():
             st.header("*******")
 
         case "Reinicio de formularios":
-            st.header("------")
+            st.header("-------")
 
 if __name__ == "__main__":
     main()
