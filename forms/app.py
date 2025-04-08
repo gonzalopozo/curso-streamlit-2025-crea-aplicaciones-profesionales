@@ -31,7 +31,15 @@ def main():
                 st.success(f"¡Hola {name} {lastname}! Has creado una cuenta")
 
         case "Enfoques de formularios":
-            st.header("*******")
+            st.header("Dos enfoques para formularios")
+            st.subheader("1. Enfoque como administrador de contexto")
+            with st.form(key="formulario1"):
+                st.write("Formulario 1 - Usando administrador de contexto")
+                username = st.text_input("Nombre de usuario")
+                submit_btn_form1 = st.form_submit_button(label="Iniciar sesión")
+
+            if submit_btn_form1:
+                st.success(f"¡Bienvenido {username}!")
 
         case "Reinicio de formularios":
             st.header("-------")
