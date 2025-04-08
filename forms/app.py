@@ -3,7 +3,7 @@ import streamlit as st
 def main():
     st.title("Tutorial de formularios en streamlit")
 
-    menu = ["Inicio", "Formularios básicos", "Enfoques de formularios", "Reinicio de formularios"]
+    menu = ["Inicio", "Formularios básicos", "Enfoques de formularios", "Calculadora de salario", "Reinicio de formularios"]
     sidebar_select_option = st.sidebar.selectbox("Selecciona una opción:", menu)
 
     match sidebar_select_option:
@@ -25,7 +25,7 @@ def main():
                 st.write("Formulario simple de registro")
                 name = st.text_input("Nombre:")
                 lastname = st.text_input("Apellido:")
-                submit_btn = st.form_submit_button(label="Iniciar")
+                submit_btn = st.form_submit_button(label="Iniciar sesión")
 
             if submit_btn:
                 st.success(f"¡Hola {name} {lastname}! Has creado una cuenta")
@@ -49,6 +49,27 @@ def main():
 
             if submit_btn_form2:
                 st.info(f"Tu puesto de trabajo es {job} 💪")
+
+        case "Calculadora de salario":
+            st.header("Formulario con columnas")
+
+            with st.form(key="formulario_salario"):
+                col1, col2, col3, col4 = st.columns(4)
+
+                with col1:
+                    hour_fee = st.number_input("Tarifa por hora en euros (€)", min_value=0.0)
+
+                with col2:
+                    hours_per_day = st.number_input("Horas cada día", min_value=0.30, max_value=8.30)
+
+                with col3:
+                    days_per_week = st.number_input("Días a la semana", min_value=1, max_value=7)
+
+                with col4:
+                    calcular = st.form_submit_button("Calcular salario")
+
+                if calcular:
+                    st.write("Prueba formularios con columnas")
 
         case "Reinicio de formularios":
             st.header("-------")
