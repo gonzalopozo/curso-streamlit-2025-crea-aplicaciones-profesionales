@@ -25,7 +25,7 @@ def main():
                 st.write("Formulario simple de registro")
                 name = st.text_input("Nombre:")
                 lastname = st.text_input("Apellido:")
-                submit_btn = st.form_submit_button(label="sign_up")
+                submit_btn = st.form_submit_button(label="Iniciar")
 
             if submit_btn:
                 st.success(f"¡Hola {name} {lastname}! Has creado una cuenta")
@@ -40,6 +40,15 @@ def main():
 
             if submit_btn_form1:
                 st.success(f"¡Bienvenido {username}!")
+
+            st.subheader("2. Enfoque declarado")
+            form2 = st.form(key="formulario2")
+            form2.write("Formulario 2 - Usando enfoque declarado")
+            job = form2.selectbox("Selecciona tu puesto de trabajo", ["Científico de datos", "Desarrollador WEB", "Contable"])
+            submit_btn_form2 = form2.form_submit_button(label="Enviar")
+
+            if submit_btn_form2:
+                st.info(f"Tu puesto de trabajo es {job} 💪")
 
         case "Reinicio de formularios":
             st.header("-------")
