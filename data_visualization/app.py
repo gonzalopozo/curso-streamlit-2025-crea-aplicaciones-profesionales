@@ -32,7 +32,6 @@ with st.expander("📄 Introducción", expanded=True):
         * **Matplotlib**: biblioteca base para visualización
         * **Seaborn**: visualizaciones estadísticas de alto nivel
         * **Plotly**: gráficos interactivos
-        * **Streamlit**: framework para aplicaciones de datos
     """
     )
 
@@ -172,7 +171,26 @@ try:
 
     st.plotly_chart(fig3, use_container_width=True)
 
+    # learn Conclusiones
+    st.header("📌 Conclusiones")
+    st.markdown("""
+    ### Comparación de librerias
+                
+    1. **Matplotlib**
+    * Biblioteca base para visualización
+    * Mayor control sobre los detalles del gráfico
+    * Curva de aprendizaje más pronunciada
 
+    2. **Seabron**
+    * Construida sobre Matplotlib
+    * Excelente para visualizaciones estdísticas
+    * Estilos predefinidos atractivos
+
+    3. **Plotly**
+    * Gráficos interactivos
+    * Excelente para dashboards web
+    * Amplia variedad de tipos de gráficos
+    """)
 
 except Exception as e:
     st.error(f"❌ Error al cargar los datos: {str(e)}")
