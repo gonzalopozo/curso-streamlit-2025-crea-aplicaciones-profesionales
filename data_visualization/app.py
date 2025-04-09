@@ -7,13 +7,14 @@ import plotly.express as px
 @st.cache_data
 def load_nba_file():
     nba_df = pd.read_parquet('./data/average.parq')
+    nba_df.reset_index(inplace=True)
     print(nba_df.columns)
     print(nba_df.nunique())
     print(nba_df.dtypes)
     print(nba_df.head())
     return nba_df
 
-# Configuración de la página 
+# learn Configuración de la página 
 st.set_page_config(
     page_title="Dashboard",
     page_icon="🤑",
@@ -39,7 +40,7 @@ try:
 
     st.success('✅ Datos cargados exitosamente')
 
-    # Visualizaciones con Matplotlib
+    # learn Visualizaciones con Matplotlib
     st.header("🖌 Visualizaciones con Matplotlib")
 
     with st.container():
@@ -71,7 +72,7 @@ try:
             st.pyplot(fig)
             plt.close()
 
-    # Visualizaciones con Seaborn
+    # learn Visualizaciones con Seaborn
     st.header("🎯 Visualizaciones con Seaborn")
 
 
@@ -83,7 +84,7 @@ try:
             fig, ax = plt.subplots(figsize=(8, 6))
             sns.violinplot(data=nba_df, x='season', y='PTS')
             plt.xticks(rotation="vertical")
-            plt.title('Mayores PPG de la historia de la NBA')
+            plt.title('PPG por temporada de la historia de la NBA')
             st.pyplot(fig)
             plt.close()
 
@@ -92,10 +93,51 @@ try:
             fig, ax = plt.subplots(figsize=(8, 6))
             sns.boxplot(data=nba_df, x='season', y='PTS')
             plt.xticks(rotation="vertical")
-            plt.title('Mayores PPG de la historia de la NBA')
+            plt.title('PPG por temporada de la historia de la NBA')
             st.pyplot(fig)
             plt.close()
     
+    # learn Visualizaciones interactivas con Plotly
+    st.header("🎩 Visualizaciones interactivas con Plotly")
+
+    with st.container():
+        # learn Gráficos de línea interactivo
+        nba_df = nba_df.sort_values('index')
+
+
+        kobe_df = nba_df[nba_df['Player'] == 'Kobe Bryant']
+        fig = px.line(
+            kobe_df,
+            x='season',
+            y='PTS',
+            title='PPG por temporada de Kobe Bryant',
+            markers=True,
+        )
+
+        st.plotly_chart(fig, use_container_width=True)
+
+        # learn 1. Sumar los partidos jugados por jugador
+        grouped_df = nba_df.groupby('Player')['G'].sum().reset_index()
+
+        # learn 2. Filtrar jugadores con al menos 100 partidos
+        players_100 = grouped_df[grouped_df['G'] >= 100]['Player']
+
+        # learn 3. Filtrar el DataFrame original con solo esos jugadores
+        filtered_df = nba_df[nba_df['Player'].isin(players_100)]
+
+        # learn 4. Agrupar por edad y sacar promedio de puntos
+        ages_df = filtered_df.groupby('Age')['PTS'].mean().reset_index()
+
+        # learn 5. Pie chart con Plotly
+        fig2 = px.pie(
+            ages_df,
+            names='Age',
+            values='PTS',
+            title='Promedio de PTS por Edad (jugadores con ≥ 100 partidos)',
+            hole=0.3
+        )  # learn Puedes quitar hole si no quieres donut
+
+        st.plotly_chart(fig2, use_container_width=True)
 
 
 
