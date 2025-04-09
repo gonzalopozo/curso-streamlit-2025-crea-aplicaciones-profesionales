@@ -8,11 +8,13 @@ import plotly.express as px
 def load_nba_file():
     nba_df = pd.read_parquet('./data/average.parq')
     nba_df.reset_index(inplace=True)
-    print(nba_df.columns)
-    print(nba_df.nunique())
-    print(nba_df.dtypes)
-    print(nba_df.head())
     return nba_df
+
+@st.cache_data
+def load_nba_playoffs_file():
+    nba_playoffs_df = pd.read_parquet('./data/average_playoffs.parq')
+    nba_playoffs_df.reset_index(inplace=True)
+    return nba_playoffs_df
 
 # learn Configuración de la página 
 st.set_page_config(
@@ -138,6 +140,37 @@ try:
         )  # learn Puedes quitar hole si no quieres donut
 
         st.plotly_chart(fig2, use_container_width=True)
+
+    # learn Sección interactiva
+    st.header("🧠 Sección interactiva")
+
+    # learn Selector dataset
+    dataset_choice = st.radio(
+        "Selecciona el conjunto de datos",
+        ["Temporada regular", "Playoffs"]
+    )
+
+    if dataset_choice == "Temporada regular":
+        df = load_nba_file()
+    else:
+        df = load_nba_playoffs_file()
+
+    graph_type = st.selectbox(
+        'Selecciona el tipo de gráfico',
+        ['Barras','Dispersión', 'Línea']
+    )
+
+    x = st.selectbox('Selecciona el eje X', df.columns)
+    y = st.selectbox('Selecciona el eje Y', df.columns)
+
+    if graph_type == "Barras":
+        fig3 = px.bar(df, x=x, y=y)
+    elif graph_type == "Dispersión":
+        fig3 = px.scatter(df, x=x, y=y)
+    else:
+        fig3 = px.line(df, x=x, y=y)
+
+    st.plotly_chart(fig3, use_container_width=True)
 
 
 
