@@ -71,6 +71,31 @@ try:
             st.pyplot(fig)
             plt.close()
 
+    # Visualizaciones con Seaborn
+    st.header("🎯 Visualizaciones con Seaborn")
+
+
+    with st.container():
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.subheader("Gráfico de violín")
+            fig, ax = plt.subplots(figsize=(8, 6))
+            sns.violinplot(data=nba_df, x='season', y='PTS')
+            plt.xticks(rotation="vertical")
+            plt.title('Mayores PPG de la historia de la NBA')
+            st.pyplot(fig)
+            plt.close()
+
+        with col2:
+            st.subheader("Gráfico de violín")
+            fig, ax = plt.subplots(figsize=(8, 6))
+            sns.boxplot(data=nba_df, x='season', y='PTS')
+            plt.xticks(rotation="vertical")
+            plt.title('Mayores PPG de la historia de la NBA')
+            st.pyplot(fig)
+            plt.close()
+    
 
 
 
