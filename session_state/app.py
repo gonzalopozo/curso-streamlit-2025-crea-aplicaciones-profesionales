@@ -36,6 +36,30 @@ def home_page():
 
 def settings_page():
     st.subheader("Página de configuración")
+    if "font_size" not in st.session_state:
+        st.session_state.font_size = 20
+
+    def incrementar(): 
+        st.session_state.font_size += 1
+
+    def decrementar(): 
+        st.session_state.font_size -= 1
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.button("Aumentar fuente", on_click=incrementar)
+
+    with col2:
+        st.button("Reducir fuente", on_click=decrementar)
+
+    st.write(f"Tamaño de la fuente actual: {st.session_state.font_size}")
+
+    st.html(f"""
+        <p style="font-size: {st.session_state.font_size}px;">
+            ¡MÍRAME!
+        </p>
+    """)
+
 
 def about_page():
     st.subheader("Acerca de ")
